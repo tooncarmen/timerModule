@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="TTSMultiTimer:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/TTSMultiTimer_jar</output-path>
+    <root id="archive" name="TTSMultiTimer.jar">
+      <element id="module-output" name="TTSMultiTimer" />
+      <element id="library" level="project" name="Maven: org.mobicents.external.freetts:mbrola:1.2.2" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/net/sf/sociaal/freetts/1.2.2/freetts-1.2.2.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
