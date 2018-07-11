@@ -12,6 +12,7 @@ public class TextToSpeech implements ExecutableEvent {
     private Voice voice;
     private boolean active = false;
     private String message;
+    private final static int MAX_SOUNDING_SEC = 15;
 
 
     public TextToSpeech() {
@@ -67,8 +68,10 @@ public class TextToSpeech implements ExecutableEvent {
 
     @Override
     public void stop() {
-        System.out.println("\r Stopping [" + message + "]");
-        this.active = false;
+        if(active){
+            System.out.println("\r Stopping [" + message + "]");
+            this.active = false;
+        }
     }
 
     @Override
@@ -78,12 +81,16 @@ public class TextToSpeech implements ExecutableEvent {
 
     @Override
     public void run() {
+        LocalTime stopTime = LocalTime.now().plusSeconds(MAX_SOUNDING_SEC);
         while (active) {
+
             Runnable r = (Runnable) Toolkit.getDefaultToolkit().getDesktopProperty("win.sound.exclamation");
             r.run();
             System.out.println("\r" + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss | ")) + message);
             voice.speak(message);
-            //   active = false;
+            if(stopTime.isBefore(LocalTime.now())){
+                stop();
+            }
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
