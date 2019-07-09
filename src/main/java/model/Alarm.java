@@ -45,7 +45,7 @@ public class Alarm implements Comparable {
     }
 
     public void stop() {
-        event.stop();
+        event.stop(true);
     }
 
     public LocalTime getTime() {

@@ -35,15 +35,15 @@ public class Beep implements ExecutableEvent {
     }
 
     @Override
-    public void activateOnce() {
-        activate();
-        active = false;
+    public void stop(boolean showStopMessage) {
+        if (showStopMessage) System.out.println("Stopping Bleep");
+        this.active = false;
     }
 
     @Override
-    public void stop() {
-        System.out.println("Stopping Bleep");
-        this.active = false;
+    public void activateOnce() {
+        activate();
+        active = false;
     }
 
     @Override

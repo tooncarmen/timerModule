@@ -12,7 +12,7 @@ public class TextToSpeech implements ExecutableEvent {
     private Voice voice;
     private boolean active = false;
     private String message;
-    private final static int MAX_SOUNDING_SEC = 15;
+    private final static int MAX_SOUNDING_SEC = 30;
 
 
     public TextToSpeech() {
@@ -40,7 +40,7 @@ public class TextToSpeech implements ExecutableEvent {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        stop();
+        stop(false);
     }
 
     private void startThis() {
@@ -63,13 +63,13 @@ public class TextToSpeech implements ExecutableEvent {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        stop();
+        stop(false);
     }
 
     @Override
-    public void stop() {
-        if(active){
-            System.out.println("\r Stopping [" + message + "]");
+    public void stop(boolean showStopMessage) {
+        if (active) {
+            if (showStopMessage) System.out.println("\r Stopping [" + message + "]");
             this.active = false;
         }
     }
@@ -88,8 +88,8 @@ public class TextToSpeech implements ExecutableEvent {
             r.run();
             System.out.println("\r" + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss | ")) + message);
             voice.speak(message);
-            if(stopTime.isBefore(LocalTime.now())){
-                stop();
+            if (stopTime.isBefore(LocalTime.now())) {
+                stop(true);
             }
             try {
                 Thread.sleep(2000);

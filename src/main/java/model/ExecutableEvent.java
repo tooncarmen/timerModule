@@ -10,7 +10,7 @@ public interface ExecutableEvent extends Runnable {
 
     void activateOnce(String message);
 
-    void stop();
+    void stop(boolean showStopMessage);
 
     boolean isActive();
 }
